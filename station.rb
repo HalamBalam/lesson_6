@@ -5,6 +5,8 @@ class Station
 
   attr_reader :name, :trains
 
+  EMPTY_NAME = "Не указано наименование"
+
   @@instances = []
 
   def self.all
@@ -45,7 +47,7 @@ class Station
   protected
 
   def validate!
-    raise "Не указано наименование" if name.empty?
+    raise EMPTY_NAME if name.empty?
   end
 
   private

@@ -7,7 +7,8 @@ class Train
 
   attr_reader :number, :speed, :wagons
 
-  NUMBER_FORMAT = /^(\d|[a-z]){3}-?(\d|[a-z]){2}$/i
+  NUMBER_FORMAT = /^[\da-z]{3}-?[\da-z]{2}$/i
+  WRONG_NUMBER_FORMAT = "Неверный формат номера"
 
   @@trains = {}
 
@@ -99,7 +100,7 @@ class Train
   protected
 
   def validate!
-    raise "Неверный формат номера" if number !~ NUMBER_FORMAT
+    raise WRONG_NUMBER_FORMAT if number !~ NUMBER_FORMAT
   end
 
 end

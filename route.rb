@@ -5,6 +5,10 @@ class Route
 
   attr_reader :stations
 
+  INCORRECT_START_TYPE  = "Неверный тип начальной станции"
+  INCORRECT_FINISH_TYPE = "Неверный тип конечной станции"
+  SAME_STATIONS         = "Начальные и конечные станции не должны совпадать"
+
   def initialize(start, finish)
     @stations = [start, finish]
     validate!
@@ -18,10 +22,6 @@ class Route
   def delete_station(station)
     return if [@stations.first, @stations.last].include?(station)
     @stations.delete(station)
-  end
-
-  def print
-    stations.each { |station| puts station.name }
   end
 
   def description
@@ -40,9 +40,9 @@ class Route
   protected
 
   def validate!
-    raise "Неверный тип начальной станции" unless stations[0].is_a?(Station)
-    raise "Неверный тип конечной станции" unless stations[-1].is_a?(Station)
-    raise "Начальные и конечные станции не должны совпадать" if stations[0] == stations[-1]
+    raise INCORRECT_START_TYPE unless stations[0].is_a?(Station)
+    raise INCORRECT_FINISH_TYPE unless stations[-1].is_a?(Station)
+    raise SAME_STATIONS if stations[0] == stations[-1]
   end
 
 end
